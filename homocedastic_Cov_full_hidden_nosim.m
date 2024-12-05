@@ -1,6 +1,4 @@
 function [S_O, exec_time, K, term_fro, term_norm1, term_normnuc, term_normlasso] = homocedastic_Cov_full_hidden(lambda_scale, C_O, w, alpha, beta, M)   
-
-    %% Start of the function
     
     tic
     O = size(C_O,1);
@@ -16,7 +14,7 @@ function [S_O, exec_time, K, term_fro, term_norm1, term_normnuc, term_normlasso]
     cvx_solver mosek;
     
     % Variables
-    variable S_O(O,O) symmetric nonnegative
+    variable S_O(O,O) nonnegative
     variable K(O,O) 
 
     frobenius_term = norm(((eye(O) - S_O) * sqrtm(C_O) - K * inv(sqrtm(C_O)) ), 'fro');
